@@ -18,6 +18,16 @@ public class ReverseLinkedList {
         this.head = null;
     }
 
+    public Node reverseListRecursive(Node current) {
+        if (current == null || current.next == null) {
+            return current;
+        }
+        Node newHead = reverseListRecursive(current.next);
+        current.next.next = current;
+        current.next = null;
+        return newHead;
+    }
+
     public void reverseList() {
         if (head == null || head.next == null) {
             return;
@@ -34,7 +44,7 @@ public class ReverseLinkedList {
             current = next;
         }
 
-        head = prev; 
+        head = prev;
     }
 
     public void printList() {
@@ -57,8 +67,14 @@ public class ReverseLinkedList {
         list.printList();
 
         list.reverseList();
+        System.out.println("Reversed Linked List (Iterative):");
+        list.printList();
 
-        System.out.println("Reversed Linked List:");
+        list.head = list.reverseListRecursive(list.head);
+        System.out.println("Reversed Linked List (Recursive):");
         list.printList();
     }
 }
+
+    
+
